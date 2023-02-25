@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tooltip. Hovers a text over the thing when user mouses over. */
+
+.htd-tooltip::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  background-color: black;
+  border-radius: 4px;
+  padding: .5rem;
+  transform: translateY(0);
+  opacity: 0;
+  transition: all ease .5s;
+  transition-delay: .1s;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.htd-tooltip:hover::before {
+  opacity: 1;
+  transform: translateY(-2em);
+}

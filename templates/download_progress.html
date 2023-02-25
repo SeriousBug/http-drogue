@@ -1,0 +1,63 @@
+{% extends "_base.html" %} {% block body %}
+
+<body>
+  <table class="table w-full">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>D/L Speed</td>
+        <td>Time remaining</td>
+        <td>Completed</td>
+        <td>Downloaded</td>
+        <td>Total</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for file in files %}
+      <tr class="hover">
+        <td>
+          {% if file.failed %}
+          <form class="inline" action="/request_download" method="POST">
+            <input type="hidden" name="restarting" value="true" />
+            <input type="hidden" name="url" value="{{file.url}}" />
+            <input type="submit" class="inline btn btn-primary p-2" value="Restart" />
+          </form>
+          <div class="badge badge-error gap-2">
+            failed
+          </div>
+          {% endif %}
+          <span class="htd-tooltip" data-tooltip="{{file.url}}">{{file.name}}</span>
+        </td>
+        <td>{{file.speed}}</td>
+        <td>
+          {% match file.time_estimate %}
+          {% when Some with (time_estimate) %}
+          {{time_estimate}}
+          {% when None %}
+          -
+          {% endmatch %}
+        </td>
+        <td>
+          {% match file.percent %}
+          {% when Some with (percent) %}
+          {{percent}}%
+          {% when None %}
+          -
+          {% endmatch %}
+        </td>
+        <td>{{file.progress}}</td>
+        <td>
+          {% match file.total %}
+          {% when Some with (total) %}
+          {{total}}
+          {% when None %}
+          -
+          {% endmatch %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+{% endblock %}

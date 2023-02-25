@@ -1,0 +1,48 @@
+[package]
+name = "http-drogue"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# Web server
+actix-web = "4"
+# Templates
+askama = "0.11"
+# HTTP requests
+reqwest = { version = "0.11", features = ["stream"] }
+# Serialization & deserialization, needed for form submissions
+serde = { version = "1.0", features = ["derive"] }
+# Store data
+cuttlestore = { version = "0.2", default-features = false, features = [
+  "backend-sqlite",
+  "logging-tracing",
+] }
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+# Futures and streams
+futures = "0.3"
+# Downloaders are all actors
+ractor = "0.7"
+# Async traits, required for ractor
+async-trait = "0.1"
+# File IO
+tokio = { version = "1", features = ["fs"] }
+# Random file names for in-progress downloads
+ulid = "1.0"
+# Match file name from url
+regex = "1.7"
+# Clean up filename from URL as fallback
+sanitize-filename = "0.4.0"
+# Cache the regular expression
+lazy_static = "1.4.0"
+# Errors
+thiserror = "1.0"
+# Embed style files
+rust-embed-for-web = "11.1"
+actix-web-rust-embed-responder = "2.1.1"
+# Basic HTTP Auth
+actix-web-httpauth = "0.8"
+scrypt = "0.10"

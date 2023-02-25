@@ -1,0 +1,23 @@
+{% extends "_base.html" %} {% block body %}
+
+<body class="h-screen">
+  <form action="/request_download" method="POST"
+    class="form-control flex lg:flex-row flex-col justify-center items-center">
+    <div class="p-8">
+      <label class="label" for="url">
+        <span class="label-text">Download URL</span>
+      </label>
+      <input class="input input-bordered w-full lg:w-96" type="text" id="url" name="url"
+        placeholder="https://example.com/some/file" />
+    </div>
+    <input class="btn btn-primary m-8" type="submit" value="Start download" />
+  </form>
+
+  <input class="btn btn-accent m-8" type="button" value="Refresh list"
+    onclick="document.getElementById('download-list').src = '/list';" />
+
+  <iframe id="download-list" class="w-full h-full" src="/list">
+  </iframe>
+</body>
+
+{% endblock %}

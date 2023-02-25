@@ -1,0 +1,12 @@
+{
+  "name": "http-drogue",
+  "devDependencies": {
+    "tailwindcss": "^3.2.7",
+    "daisyui": "^2.51.0"
+  },
+  "scripts": {
+    "style:build": "tailwindcss -i src/input.css -o dist/output.css --minify",
+    "style:dev": "tailwindcss -i src/input.css -o dist/output.css --watch"
+  }
+  
+}

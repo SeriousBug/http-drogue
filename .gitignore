@@ -1,0 +1,13 @@
+/target
+store.sqlite*
+*.tmp
+*.jpg
+*.png
+!/pub/*.png
+/dist
+/node_modules
+*.zip
+*.gz
+*.xz
+Docker/**/*
+!Docker/Dockerfile
