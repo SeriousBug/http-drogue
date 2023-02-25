@@ -55,13 +55,14 @@ VERSION=$(sed -nr 's/^version *= *"([0-9.]+)"/\1/p' Cargo.toml)
 prompt_confirm "Releasing version ${VERSION}, please make sure all Cargo.toml and package.json files are updated."
 
 # Build the CSS
-pushd
 yarn style:build
-popd
 
 # Make the builds
 for target in "${!TARGETS[@]}"; do
   echo Building "${target}"
+  # Keeping the cached builds seem to be breaking things when going between targets
+  # This wouldn't be a problem if these were running in a matrix on the CI...
+  rm -rf target/release/
   cross build -j $(($(nproc) / 2)) --release --target "${target}"
   if [[ "${target}" =~ .*"windows".* ]]; then
     zip -j "http-drogue.${VERSION}.${TARGETS[${target}]}.zip" target/"${target}"/release/http-drogue.exe 1>/dev/null

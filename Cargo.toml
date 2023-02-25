@@ -1,9 +1,14 @@
 [package]
 name = "http-drogue"
+description = "A tiny service that downloads files over HTTP links, with resume and restart support."
 version = "0.1.0"
 edition = "2021"
+license = "AGPL-3.0-only"
+readme = "README.md"
+repository = "https://github.com/SeriousBug/http-drogue"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[profile.release]
+lto = true
 
 [dependencies]
 # Web server
@@ -11,12 +16,15 @@ actix-web = "4"
 # Templates
 askama = "0.11"
 # HTTP requests
-reqwest = { version = "0.11", features = ["stream"] }
+reqwest = { version = "0.11", default-features = false, features = [
+  "stream",
+  "rustls-tls",
+] }
 # Serialization & deserialization, needed for form submissions
 serde = { version = "1.0", features = ["derive"] }
 # Store data
-cuttlestore = { version = "0.2", default-features = false, features = [
-  "backend-sqlite",
+cuttlestore = { version = "0.2.1", default-features = false, features = [
+  "backend-sqlite-rustls",
   "logging-tracing",
 ] }
 # Logging

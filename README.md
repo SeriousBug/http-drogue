@@ -1,5 +1,9 @@
 # Http Drogue
 
+[![Releases](https://img.shields.io/github/v/release/SeriousBug/http-drogue?include_prereleases)](https://github.com/SeriousBug/http-drogue/releases)
+[![Docker Image Size](https://img.shields.io/docker/image-size/seriousbug/http-drogue)](https://hub.docker.com/r/seriousbug/http-drogue)
+[![MIT license](https://img.shields.io/github/license/SeriousBug/http-drogue)](https://github.com/SeriousBug/http-drogue/blob/master/LICENSE.txt)
+
 Http Drogue is a tiny service that downloads files over HTTP from links you
 provide. It can restart and resume interrupted downloads.
 
@@ -24,7 +28,7 @@ docker run \
   -v $HOME/.local/share/http-drogue:/data \
   -e HTTP_DROGUE_PASSWORD=correct-horse-battery-staple \
   -p 8080:8080 \
-  SeriousBug/http-drogue
+  seriousbug/http-drogue
 ```
 
 This will store the downloads in `~/Downloads`, and the app data in `~/.local/share`, and use `correct-horse-battery-staple` as the login password. Again, enter any username to log in.
@@ -37,7 +41,7 @@ version: '3'
 
 services:
   http-drogue:
-    image: SeriousBug/http-drogue
+    image: seriousbug/http-drogue
     restart: always
     volumes:
       - /path/to/host/downloads:/downloads
